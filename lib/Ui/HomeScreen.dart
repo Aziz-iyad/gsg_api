@@ -127,11 +127,39 @@ class HomeScreen extends StatelessWidget {
                                         children: [
                                           Text(provider
                                               .categoryProducts[index].title),
-                                          Text('Price: ' +
-                                              provider
-                                                  .categoryProducts[index].price
-                                                  .toString() +
-                                              '\$'),
+                                          Row(
+                                            children: [
+                                              Text('Price: ' +
+                                                  provider
+                                                      .categoryProducts[index]
+                                                      .price
+                                                      .toString() +
+                                                  '\$'),
+                                              Spacer(),
+                                              IconButton(
+                                                  onPressed: () {
+                                                    provider.addToFavourite(
+                                                        provider.categoryProducts[
+                                                            index]);
+                                                  },
+                                                  icon: Icon(
+                                                    Icons.favorite,
+                                                    size: 25,
+                                                    color: provider
+                                                                .favouriteProducts
+                                                                ?.any((element) =>
+                                                                    element
+                                                                        .id ==
+                                                                    provider
+                                                                        .categoryProducts[
+                                                                            index]
+                                                                        .id) ??
+                                                            false
+                                                        ? Colors.red
+                                                        : Colors.black,
+                                                  ))
+                                            ],
+                                          ),
                                         ],
                                       ),
                                     ],

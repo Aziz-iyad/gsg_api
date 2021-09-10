@@ -46,10 +46,18 @@ class ProductDetails extends StatelessWidget {
                                 IconButton(
                                   icon: Icon(
                                     Icons.favorite,
-                                    color: Colors.red,
+                                    color: provider.favouriteProducts?.any(
+                                                (element) =>
+                                                    element.id ==
+                                                    provider
+                                                        .selectedProduct.id) ??
+                                            false
+                                        ? Colors.red
+                                        : Colors.black,
                                   ),
                                   onPressed: () {
-                                    provider.addToFavourite();
+                                    provider.addToFavourite(
+                                        provider.selectedProduct);
                                   },
                                 )
                               ],
@@ -76,7 +84,7 @@ class ProductDetails extends StatelessWidget {
                       ),
                       GestureDetector(
                         onTap: () {
-                          provider.addToCart();
+                          provider.addToCart(provider.selectedProduct);
                         },
                         child: Container(
                             margin: EdgeInsets.all(10),

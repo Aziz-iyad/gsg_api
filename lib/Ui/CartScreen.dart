@@ -17,15 +17,15 @@ class _CartScreenState extends State<CartScreen> {
       appBar: AppBar(
         title: Text('cart'),
       ),
-      body: FutureBuilder(
-          future: DbHelper.dbHelper.getAllCartItems(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.done) {
-              List<ProductResponse> cartItems = snapshot.data;
-              return ListView.builder(
-                  itemCount: cartItems.length,
+      body: Consumer<HomeProvider>(
+        builder: (context, provider, x) {
+          return provider.cartProducts == null
+              ? Center(
+                  child: Text('No Cart Items'),
+                )
+              : ListView.builder(
+                  itemCount: provider.cartProducts.length,
                   itemBuilder: (context, index) {
-                    print(cartItems[index].image);
                     return Padding(
                       padding: const EdgeInsets.only(bottom: 5),
                       child: Container(
@@ -44,9 +44,8 @@ class _CartScreenState extends State<CartScreen> {
                             ]),
                         child: Row(
                           children: [
-                            Expanded(
-                                child: CachedNetworkImage(
-                                    imageUrl: cartItems[index].image)),
+                            CachedNetworkImage(
+                                imageUrl: provider.cartProducts[index].image),
                             SizedBox(
                               width: 10,
                             ),
@@ -56,13 +55,15 @@ class _CartScreenState extends State<CartScreen> {
                                 Padding(
                                   padding:
                                       const EdgeInsets.symmetric(vertical: 10),
-                                  child: Text(cartItems[index].title,
-                                      style: TextStyle(fontSize: 15)),
+                                  child: Text(
+                                      provider.cartProducts[index].title,
+                                      style: TextStyle(fontSize: 9)),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Text(
-                                    cartItems[index].price.toString(),
+                                    provider.cartProducts[index].price
+                                        .toString(),
                                     style: TextStyle(
                                         color: Colors.red, fontSize: 20),
                                   ),
@@ -74,12 +75,8 @@ class _CartScreenState extends State<CartScreen> {
                       ),
                     );
                   });
-            } else if (snapshot.hasError) {
-              return Center(child: Text('error'));
-            } else {
-              return Center(child: CircularProgressIndicator());
-            }
-          }),
+        },
+      ),
     );
   }
 }

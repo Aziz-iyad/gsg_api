@@ -12,13 +12,14 @@ class FavoriteScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('Favorite'),
       ),
-      body: FutureBuilder(
-          future: DbHelper.dbHelper.getAllFavouriteItems(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.done) {
-              List<ProductResponse> favItems = snapshot.data;
-              return ListView.builder(
-                  itemCount: favItems.length,
+      body: Consumer<HomeProvider>(
+        builder: (context, provider, x) {
+          return provider.favouriteProducts == null
+              ? Center(
+                  child: Text('No Favourites'),
+                )
+              : ListView.builder(
+                  itemCount: provider.favouriteProducts.length,
                   itemBuilder: (context, index) {
                     return Padding(
                       padding: const EdgeInsets.only(bottom: 5),
@@ -38,9 +39,9 @@ class FavoriteScreen extends StatelessWidget {
                             ]),
                         child: Row(
                           children: [
-                            Expanded(
-                                child: CachedNetworkImage(
-                                    imageUrl: favItems[index].image)),
+                            CachedNetworkImage(
+                                imageUrl:
+                                    provider.favouriteProducts[index].image),
                             SizedBox(
                               width: 10,
                             ),
@@ -50,13 +51,15 @@ class FavoriteScreen extends StatelessWidget {
                                 Padding(
                                   padding:
                                       const EdgeInsets.symmetric(vertical: 10),
-                                  child: Text(favItems[index].title,
-                                      style: TextStyle(fontSize: 15)),
+                                  child: Text(
+                                      provider.favouriteProducts[index].title,
+                                      style: TextStyle(fontSize: 9)),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Text(
-                                    favItems[index].price.toString(),
+                                    provider.favouriteProducts[index].price
+                                        .toString(),
                                     style: TextStyle(
                                         color: Colors.red, fontSize: 20),
                                   ),
@@ -68,12 +71,8 @@ class FavoriteScreen extends StatelessWidget {
                       ),
                     );
                   });
-            } else if (snapshot.hasError) {
-              return Center(child: Text('error'));
-            } else {
-              return Center(child: CircularProgressIndicator());
-            }
-          }),
+        },
+      ),
     );
   }
 }

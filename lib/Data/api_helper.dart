@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:gsg_api/Models/Product_Response.dart';
 
 class ApiHelper {
   ApiHelper._();

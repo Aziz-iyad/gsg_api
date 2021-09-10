@@ -36,7 +36,7 @@ class DbHelper {
       onCreate: (db, v) {
         print('data base have been created');
         db.execute('''CREATE TABLE $cartTableName (
-          $idColumnName INTEGER PRIMARY KEY AUTOINCREMENT,
+          $idColumnName INTEGER PRIMARY KEY ,
            $titleColumnName TEXT,
            $priceColumnName TEXT,
            $descriptionColumnName  TEXT,
@@ -85,5 +85,9 @@ class DbHelper {
       return ProductResponse.fromMap(e);
     }).toList();
     return favItems;
+  }
+
+  deleteProductFromFavourite(int id) async {
+    database.delete(favoriteTableName, where: 'id=?', whereArgs: [id]);
   }
 }

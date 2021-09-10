@@ -43,6 +43,18 @@ class ProductResponse {
     return data;
   }
 
+  // Map<String, dynamic> todBJson() {
+  //   final Map<String, dynamic> data = new Map<String, dynamic>();
+  //   data['id'] = this.id;
+  //   data['title'] = this.title;
+  //   data['price'] = this.price;
+  //   data['description'] = this.description;
+  //   data['category'] = this.category;
+  //   data['image'] = this.image;
+  //
+  //   return data;
+  // }
+
   ProductResponse.fromMap(Map map) {
     this.id = map[DbHelper.idColumnName];
     this.title = map[DbHelper.titleColumnName];
@@ -53,6 +65,7 @@ class ProductResponse {
   }
   toMap() {
     return {
+      DbHelper.idColumnName: this.id,
       DbHelper.titleColumnName: this.title,
       DbHelper.descriptionColumnName: this.description,
       DbHelper.priceColumnName: this.price,
