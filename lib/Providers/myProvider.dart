@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gsg_api/Data/api_helper.dart';
 import 'package:gsg_api/Data/db_helper.dart';
 import 'package:gsg_api/Models/Product_Response.dart';
@@ -100,4 +101,11 @@ class HomeProvider extends ChangeNotifier {
     await DbHelper.dbHelper.deleteProductFromFavourite(id);
     getAllFavouriteProducts();
   }
+
+  List<IconData> iconsTab = [
+    FontAwesomeIcons.plug,
+    FontAwesomeIcons.gem,
+    FontAwesomeIcons.userTie,
+    FontAwesomeIcons.female,
+  ];
 }
