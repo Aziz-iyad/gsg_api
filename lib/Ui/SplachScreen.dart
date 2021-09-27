@@ -3,6 +3,7 @@ import 'package:gsg_api/Data/db_helper.dart';
 import 'package:gsg_api/Helpers/AppRouter.dart';
 import 'package:gsg_api/Providers/myProvider.dart';
 import 'package:gsg_api/services/Bnb.dart';
+import 'package:gsg_api/services/constants.dart';
 import 'package:provider/provider.dart';
 
 class SplachScreen extends StatefulWidget {
@@ -24,9 +25,12 @@ class _SplachScreenState extends State<SplachScreen> {
     Future.delayed(Duration(seconds: 2)).then(
         (value) => RouteHelper.routeHelper.goTOReplacement(Bnb.routeName));
     return Scaffold(
+      backgroundColor: kStartColor,
       body: Center(
-        child: Text('splash'),
-      ),
+          child: Image.asset(
+        "assets/images/logo.png",
+        width: 300,
+      )),
     );
   }
 }

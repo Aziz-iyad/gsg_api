@@ -64,6 +64,10 @@ class DbHelper {
     print(rowNum);
   }
 
+  deleteProductFromCart(int id) async {
+    database.delete(cartTableName, where: 'id=?', whereArgs: [id]);
+  }
+
   insertToFavourite(ProductResponse productResponse) async {
     int rowNum =
         await database.insert(favoriteTableName, productResponse.toMap());

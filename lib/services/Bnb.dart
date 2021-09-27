@@ -16,6 +16,8 @@ class Bnb extends StatelessWidget {
       builder: (context, provider, x) {
         return Scaffold(
           bottomNavigationBar: BottomNavigationBar(
+            backgroundColor: Colors.white,
+            iconSize: 25,
             currentIndex: provider.bnbIndex,
             selectedItemColor: Colors.black,
             selectedIconTheme: IconThemeData(color: kMainColor),
@@ -34,7 +36,7 @@ class Bnb extends StatelessWidget {
               BottomNavigationBarItem(
                 label: 'Favorite',
                 icon: Icon(
-                  Icons.favorite,
+                  Icons.favorite_border,
                 ),
               ),
               BottomNavigationBarItem(

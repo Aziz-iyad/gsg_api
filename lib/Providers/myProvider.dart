@@ -66,6 +66,11 @@ class HomeProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  deleteFromCart(int id) async {
+    await DbHelper.dbHelper.deleteProductFromCart(id);
+    getAllCartProducts();
+  }
+
   checkFavouriteToAdd(ProductResponse productResponse) async {}
 
   addToFavourite(ProductResponse productResponse) async {

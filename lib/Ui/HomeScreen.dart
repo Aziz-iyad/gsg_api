@@ -120,9 +120,10 @@ class HomeScreen extends StatelessWidget {
                     flex: 3,
                     child: GridView.builder(
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            crossAxisSpacing: 10,
-                            mainAxisSpacing: 10),
+                          crossAxisCount: 1,
+                          mainAxisSpacing: 10,
+                          childAspectRatio: 1.3,
+                        ),
                         itemCount: provider.categoryProducts.length,
                         itemBuilder: (context, index) {
                           return GestureDetector(
@@ -139,83 +140,89 @@ class HomeScreen extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(10),
                                   boxShadow: [
                                     BoxShadow(
-                                      color: kStartColor.withOpacity(0.1),
+                                      color: Colors.black12.withOpacity(0.3),
                                       offset: Offset(0, 1),
                                       spreadRadius: 2,
                                       blurRadius: 9,
                                     ),
                                   ],
                                   color: Colors.white,
-                                  image: DecorationImage(
-                                    image: NetworkImage(
-                                        provider.categoryProducts[index].image),
-                                  ),
+                                  // image: DecorationImage(
+                                  //   image: NetworkImage(
+                                  //       provider.categoryProducts[index].image),
+                                  // ),
                                 ),
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
-                                    // CachedNetworkImage(
-                                    //   imageUrl: provider
-                                    //       .categoryProducts[index].image,
-                                    // ),
+                                    Expanded(
+                                      child: CachedNetworkImage(
+                                        imageUrl: provider
+                                            .categoryProducts[index].image,
+                                      ),
+                                    ),
                                     Container(
                                       width: double.infinity,
                                       decoration: BoxDecoration(
                                           borderRadius:
                                               BorderRadius.circular(5),
                                           color: kMainColor.withOpacity(0.9)),
-                                      child: Column(
-                                        children: [
-                                          Text(
-                                            provider
-                                                .categoryProducts[index].title,
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w700,
-                                            ),
-                                          ),
-                                          Row(
-                                            children: [
-                                              Text(
-                                                'Price: ' +
-                                                    provider
-                                                        .categoryProducts[index]
-                                                        .price
-                                                        .toString() +
-                                                    '\$',
-                                                style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 16,
-                                                  fontWeight: FontWeight.w700,
-                                                ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Column(
+                                          children: [
+                                            Text(
+                                              provider.categoryProducts[index]
+                                                  .title,
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w700,
                                               ),
-                                              Spacer(),
-                                              IconButton(
-                                                  onPressed: () {
-                                                    provider.addToFavourite(
-                                                        provider.categoryProducts[
-                                                            index]);
-                                                  },
-                                                  icon: Icon(
-                                                    Icons.favorite,
-                                                    size: 25,
-                                                    color: provider
-                                                                .favouriteProducts
-                                                                ?.any((element) =>
-                                                                    element
-                                                                        .id ==
-                                                                    provider
-                                                                        .categoryProducts[
-                                                                            index]
-                                                                        .id) ??
-                                                            false
-                                                        ? Colors.red
-                                                        : Colors.white,
-                                                  ))
-                                            ],
-                                          ),
-                                        ],
+                                            ),
+                                            Row(
+                                              children: [
+                                                Text(
+                                                  'Price: ' +
+                                                      provider
+                                                          .categoryProducts[
+                                                              index]
+                                                          .price
+                                                          .toString() +
+                                                      '\$',
+                                                  style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 16,
+                                                    fontWeight: FontWeight.w700,
+                                                  ),
+                                                ),
+                                                Spacer(),
+                                                IconButton(
+                                                    onPressed: () {
+                                                      provider.addToFavourite(
+                                                          provider.categoryProducts[
+                                                              index]);
+                                                    },
+                                                    icon: Icon(
+                                                      Icons.favorite,
+                                                      size: 25,
+                                                      color: provider
+                                                                  .favouriteProducts
+                                                                  ?.any((element) =>
+                                                                      element
+                                                                          .id ==
+                                                                      provider
+                                                                          .categoryProducts[
+                                                                              index]
+                                                                          .id) ??
+                                                              false
+                                                          ? Colors.red
+                                                          : Colors.white,
+                                                    ))
+                                              ],
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ],
