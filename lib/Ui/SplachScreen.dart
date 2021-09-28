@@ -29,7 +29,7 @@ class _SplachScreenState extends State<SplachScreen> {
       body: Center(
           child: Image.asset(
         "assets/images/logo.png",
-        width: 300,
+        width: 200,
       )),
     );
   }

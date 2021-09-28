@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:gsg_api/Helpers/AppRouter.dart';
 import 'package:gsg_api/Providers/myProvider.dart';
 import 'package:gsg_api/services/constants.dart';
 import 'package:provider/provider.dart';
@@ -133,6 +134,7 @@ class ProductDetails extends StatelessWidget {
                         child: GestureDetector(
                           onTap: () {
                             provider.addToCart(provider.selectedProduct);
+                            RouteHelper.routeHelper.back();
                           },
                           child: Material(
                             elevation: 4,
@@ -180,7 +182,7 @@ class ProductDetails extends StatelessWidget {
                           child: Text(
                             provider.selectedProduct.title,
                             style: TextStyle(
-                                fontSize: 25,
+                                fontSize: 22,
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold),
                           ),
@@ -196,7 +198,7 @@ class ProductDetails extends StatelessWidget {
                                     provider.selectedProduct.price.toString() +
                                     '\$',
                                 style: TextStyle(
-                                  fontSize: 25,
+                                  fontSize: 20,
                                   color: Colors.white.withOpacity(0.8),
                                 ),
                               ),

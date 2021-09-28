@@ -127,8 +127,8 @@ class HomeScreen extends StatelessWidget {
                         itemCount: provider.categoryProducts.length,
                         itemBuilder: (context, index) {
                           return GestureDetector(
-                            onTap: () {
-                              provider.getSpecificProduct(
+                            onTap: () async {
+                              await provider.getSpecificProduct(
                                   provider.categoryProducts[index].id);
                               RouteHelper.routeHelper
                                   .goTO(ProductDetails.routeName);

@@ -29,7 +29,6 @@ class FavoriteScreen extends StatelessWidget {
                           padding: const EdgeInsets.only(bottom: 8),
                           child: Container(
                             height: 120,
-                            width: double.infinity,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
                                 color: Colors.white,
@@ -41,127 +40,109 @@ class FavoriteScreen extends StatelessWidget {
                                     color: Colors.black.withOpacity(0.12),
                                   ),
                                 ]),
-                            child: Row(
+                            child: Column(
                               children: [
-                                CachedNetworkImage(
-                                    imageUrl: provider
-                                        .favouriteProducts[index].image),
-                                SizedBox(
-                                  width: 10,
+                                Expanded(
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 10, horizontal: 8),
+                                    child: Text(
+                                      provider.favouriteProducts[index].title,
+                                      // overflow: TextOverflow.ellipsis,
+                                      textScaleFactor: 0.9,
+                                      style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w600),
+                                    ),
+                                  ),
                                 ),
                                 Row(
                                   children: [
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Expanded(
+                                    CachedNetworkImage(
+                                        height: 70,
+                                        width: 90,
+                                        imageUrl: provider
+                                            .favouriteProducts[index].image),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: GestureDetector(
+                                        onTap: () {
+                                          provider.deleteFromFavourite(provider
+                                              .favouriteProducts[index].id);
+                                        },
+                                        child: Container(
+                                          width: 95,
+                                          height: 30,
+                                          decoration: BoxDecoration(
+                                            color: Colors.red,
+                                            borderRadius:
+                                                BorderRadius.circular(20),
+                                          ),
                                           child: Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                vertical: 10),
-                                            child: Text(
-                                              provider.favouriteProducts[index]
-                                                  .title,
-                                              textScaleFactor: 0.9,
-                                              style: TextStyle(fontSize: 15),
+                                            padding: const EdgeInsets.only(
+                                              left: 10,
+                                            ),
+                                            child: Row(
+                                              children: [
+                                                Text(
+                                                  'Remove',
+                                                  style: TextStyle(
+                                                      fontSize: 15,
+                                                      color: Colors.white),
+                                                ),
+                                                Icon(
+                                                  Icons.clear,
+                                                  color: Colors.white,
+                                                )
+                                              ],
                                             ),
                                           ),
                                         ),
-                                        Row(
-                                          children: [
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: GestureDetector(
-                                                onTap: () {
-                                                  provider.deleteFromFavourite(
-                                                      provider
-                                                          .favouriteProducts[
-                                                              index]
-                                                          .id);
-                                                },
-                                                child: Container(
-                                                  width: 95,
-                                                  height: 30,
-                                                  decoration: BoxDecoration(
-                                                    color: Colors.red,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            20),
-                                                  ),
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                      left: 10,
-                                                    ),
-                                                    child: Row(
-                                                      children: [
-                                                        Text(
-                                                          'Remove',
-                                                          style: TextStyle(
-                                                              fontSize: 15,
-                                                              color:
-                                                                  Colors.white),
-                                                        ),
-                                                        Icon(
-                                                          Icons.clear,
-                                                          color: Colors.white,
-                                                        )
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: GestureDetector(
+                                        onTap: () {
+                                          provider.addToCart(provider
+                                              .favouriteProducts[index]);
+                                        },
+                                        child: Container(
+                                          width: 120,
+                                          height: 30,
+                                          decoration: BoxDecoration(
+                                            color: kMainColor,
+                                            borderRadius:
+                                                BorderRadius.circular(20),
+                                          ),
+                                          child: Padding(
+                                            padding: const EdgeInsets.only(
+                                              left: 10,
                                             ),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: GestureDetector(
-                                                onTap: () {
-                                                  provider.addToCart(provider
-                                                          .favouriteProducts[
-                                                      index]);
-                                                },
-                                                child: Container(
-                                                  width: 120,
-                                                  height: 30,
-                                                  decoration: BoxDecoration(
-                                                    color: kMainColor,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            20),
-                                                  ),
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                      left: 10,
-                                                    ),
-                                                    child: Row(
-                                                      children: [
-                                                        Text(
-                                                          'Add to Cart',
-                                                          style: TextStyle(
-                                                              fontSize: 15,
-                                                              color:
-                                                                  Colors.white),
-                                                        ),
-                                                        SizedBox(
-                                                          width: 5,
-                                                        ),
-                                                        Icon(
-                                                          Icons.shopping_bag,
-                                                          size: 19,
-                                                          color: Colors.white,
-                                                        )
-                                                      ],
-                                                    ),
-                                                  ),
+                                            child: Row(
+                                              children: [
+                                                Text(
+                                                  'Add to Cart',
+                                                  style: TextStyle(
+                                                      fontSize: 15,
+                                                      color: Colors.white),
                                                 ),
-                                              ),
-                                            )
-                                          ],
+                                                SizedBox(
+                                                  width: 5,
+                                                ),
+                                                Icon(
+                                                  Icons.shopping_bag,
+                                                  size: 19,
+                                                  color: Colors.white,
+                                                )
+                                              ],
+                                            ),
+                                          ),
                                         ),
-                                      ],
+                                      ),
                                     ),
                                   ],
                                 ),
